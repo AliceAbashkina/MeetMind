@@ -1,0 +1,51 @@
+html, body {
+  height: 100vh;
+  padding:0;
+  margin:0;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.MuiTextField-root{
+  border-color: #FFA630;
+  outline: none;
+}
+.MuiTextField-root:focus, .MuiTextField-root:focus-visible, .MuiTextField-root:active {
+  border-color: #FFA630;
+  outline: none;
+}
+input, textarea, select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+@font-face {
+  font-family: 'Poppins'; 
+  src: url('../public/font/Montserrat/Montserrat-Bold.ttf') format("truetype");
+  } 
+  @font-face {
+    font-family: 'Comfortaa'; 
+    src: url('../public/font/Comfortaa/static/Comfortaa-Light.ttf') format("truetype");
+    } 
+
+    @font-face {
+      font-family: 'Roboto'; 
+      src: url('../public/font/Roboto/RobotoMedium.ttf') format("truetype");
+      } 
+
+      @font-face {
+        font-family: 'RobotoThin'; 
+        src: url('../public/font/Roboto/Roboto-Thin.ttf') format("truetype");
+        } 
+
+        @font-face {
+          font-family: 'RobotoLight'; 
+          src: url('../public/font/Roboto/Roboto-Light.ttf') format("truetype");
+          } 
+
+      h2 {
+        margin:0
+      }
+
+      p {
+        font-family: Roboto;
+      }

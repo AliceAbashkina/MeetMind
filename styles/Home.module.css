@@ -1,0 +1,128 @@
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer {
+  height: 100px;
+  display: flex;
+  flex: 1;
+  padding:0;
+  justify-content: center;
+  align-items: center;
+  bottom: 0;
+  padding: 2rem 0;
+  background-color: #FFFFFF;
+
+}
+
+.footer a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+
+.grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 800px;
+}
+
+.card {
+  margin: 1rem;
+  padding: 1.5rem;
+  text-align: left;
+  color: inherit;
+  text-decoration: none;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  max-width: 300px;
+}
+
+.card:hover,
+.card:focus,
+.card:active {
+  color: #0070f3;
+  border-color: #0070f3;
+}
+
+.card h2 {
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+}
+
+.card p {
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+
+.logo {
+  height: 1em;
+  margin-left: 0.5rem;
+}
+
+
+.buttonF:focus{
+   background:linear-gradient(138.83deg, #514573 -8.57%, #BAA5FF 111.47%);
+   opacity: 1;
+   
+  }
+
+  .gridStyle {
+    padding-left:0;
+    max-width:350;
+    padding-top:0;
+  }
+
+  .LastElement{
+    background-image: url(../public/last-img.png) 50% no-repeat;
+  }
+
+  .InputCode {
+    outline: none;
+    border: 1px solid #FFA630;
+border-radius: 4px;
+width: 60px;
+height: 80px;
+  }
+
+  .buttonClassInput{
+background: none !important ;
+border: none !important;
+  }
+
+  .hoverRouter{
+  color:#FFA630
+  }
+  .hoverRouter:hover{
+  color:#BAA5FF;
+  transition: 1s;
+
+  }
+
+  .buttonPeople:hover {
+    background: #BAA5FF ;
+    transition: 1s;
+    color:#514573
+    }
+
+    .buttonPeopleAva:hover {
+    height: 85px;
+    transition: 1s;
+      }
+
+      #label {
+        color: fff;
+      }
+
+  
+
