@@ -52,7 +52,7 @@ async function callAPI(typePers) {
     phone: value,
     type: typePers,
   };
-  const response = await fetch('http://89.110.53.157:19525/v1/userSendVerifySMS',   {
+  const response = await fetch('http://89.110.53.157:19525/v1/userSendVerifySMS/',   {
     method: 'POST',
     mode: 'cors',
     body: JSON.stringify(User),
