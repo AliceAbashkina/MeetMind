@@ -81,7 +81,7 @@ function ResponsiveAppBar() {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{fontSize: { md:'10px', lg:'14px', xl:'14px'}, my: 2, color: '#4E4E4E', display: 'block', mr:{xl:'34px', md:'20px'}, textTransform: 'none', fontFamily: 'Roboto', px:0 }}
+                sx={{fontSize: { md:'14px', lg:'14px', xl:'14px'}, my: 2, color: '#4E4E4E', display: 'block', mr:{xl:'34px', md:'20px'}, textTransform: 'none', fontFamily: 'Roboto', px:0 }}
               >
                 {page}
               </Button>
