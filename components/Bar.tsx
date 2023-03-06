@@ -13,7 +13,7 @@ import { ThemeProvider } from '@mui/material';
 import buttonS from './Buttons/ButtonSmall'
 import { useRouter } from 'next/router';
 
-const pages = ['Для психологов', 'Для бизнеса', 'Подарочные сертификаты', 'Магазин', 'Акции', 'Блог'];
+const pages = ['Для психологов', 'Для бизнеса', 'Подарочные сертификаты', 'Магазин', 'Акции'];
 
 
 function ResponsiveAppBar() {
@@ -86,6 +86,12 @@ function ResponsiveAppBar() {
                 {page}
               </Button>
             ))}
+            <Button
+                onClick={()=>router.push('/blog')}
+                sx={{fontSize: { md:'14px', lg:'14px', xl:'14px'}, my: 2, color: '#4E4E4E', display: 'block', mr:{xl:'34px', md:'20px'}, textTransform: 'none', fontFamily: 'Roboto', px:0 }}
+              >
+                Блог
+              </Button>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
