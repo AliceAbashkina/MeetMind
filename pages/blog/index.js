@@ -69,7 +69,7 @@ export const getStaticProps = async () => {
     search: "password",
   };
 
-  const response = await fetch('http://89.110.53.157:19525/v1/listArticle', {
+  const response = await fetch('https://89.110.53.157:19525/v1/listArticle', {
     method: 'POST',
     mode: 'cors',
     body: JSON.stringify(setting),

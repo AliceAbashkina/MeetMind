@@ -20,7 +20,7 @@ export const getStaticProps = async (context) => {
         article_id: context.params.id
     }
 
-    const response = await fetch('http://89.110.53.157:19525/v1/singleArticle', {
+    const response = await fetch('https://89.110.53.157:19525/v1/singleArticle', {
         method: 'POST',
         mode: 'cors',
         body: JSON.stringify(setting),
@@ -40,7 +40,7 @@ export async function getStaticPaths() {
         search: "password",
     };
 
-    const response = await fetch('http://89.110.53.157:19525/v1/listArticle', {
+    const response = await fetch('https://89.110.53.157:19525/v1/listArticle', {
         method: 'POST',
         mode: 'cors',
         body: JSON.stringify(setting),
