@@ -62,6 +62,7 @@ export default function Blog( {list} ) {
 }
 
 export const getStaticProps = async () => {
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
   const setting = {
     start: 1,

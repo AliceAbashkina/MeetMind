@@ -19,6 +19,8 @@ export const getStaticProps = async (context) => {
     const setting = {
         article_id: context.params.id
     }
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; //prod delete
+
     const response = await fetch('https://89.110.53.157:19525/v1/singleArticle', {
         method: 'POST',
         mode: 'cors',
@@ -32,12 +34,16 @@ export const getStaticProps = async (context) => {
     };
 };
 export async function getStaticPaths() {
+
     // Вызываем внешнюю конечную точку API для получения постов
     const setting = {
         start: 1,
         length: 10,
         search: "password",
     };
+    
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; //prod delete
+
     const response = await fetch('https://89.110.53.157:19525/v1/listArticle', {
         method: 'POST',
         mode: 'cors',
