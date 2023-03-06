@@ -186,7 +186,7 @@ export default function Verify(this: any) {
   }
   
   async function callAPI() {
-    const response = await fetch('http://89.110.53.157:19525/v1/userActivate', {
+    const response = await fetch('https://89.110.53.157:19525/v1/userActivate', {
       method: 'POST',
       mode: 'cors',
       body: JSON.stringify(user),
