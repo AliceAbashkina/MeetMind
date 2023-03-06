@@ -56,6 +56,7 @@ async function callAPI(typePers) {
     method: 'POST',
     mode: 'cors',
     body: JSON.stringify(User),
+    referrerPolicy: "unsafe_url" 
   });
   const json = await response.json();
 console.log(json)
