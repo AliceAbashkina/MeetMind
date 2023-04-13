@@ -28,7 +28,7 @@ const mainFeaturedPost = {
   description: 'Лид главной тестовой статьи — аннотация, «шапка» статьи, новости или пресс-релиза. Состоит из одного первого выделенного абзаца, в котором коротко формулируется проблема, раскрывается суть заголовка. Размер лида обычно не превышает 3-5 строк.',
   image: 'https://source.unsplash.com/random',
   imageText: 'main image description',
-  link: 'http://localhost:3000/blog/12',
+  link: './blog/12',
   author: '1',
   date: '2023-02-03T13:58:54.685222Z',
 };
