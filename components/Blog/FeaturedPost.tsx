@@ -23,7 +23,7 @@ export default function FeaturedPost(props: FeaturedPostProps) {
   return (
     <Grid item xs={12} md={6}>
       <Box>
-        <Link href={'http://localhost:3000/blog/' + post.id} color="inherit" underline="none">
+        <Link href={'./blog/' + post.id} color="inherit" underline="none">
           <Box
             sx={{
               position: 'relative',
@@ -55,12 +55,12 @@ export default function FeaturedPost(props: FeaturedPostProps) {
               <Typography>
                 Автор: {post.author}, {post.date}
               </Typography>
-              <Link href={'http://localhost:3000/blog/' + post.id} color="inherit" underline="none">
+              <Link href={'./blog/' + post.id} color="inherit" underline="none">
                 <Typography component="h4" color="inherit" sx={{ lineHeight: '50px', fontSize: '36px', marginBottom: '26px', fontWeight: '700', marginTop: '14px' }}>
                   {post.title}
                 </Typography>
               </Link>
-              <Link href={'http://localhost:3000/blog/' + post.id} color="inherit" underline="none">
+              <Link href={'./blog/' + post.id} color="inherit" underline="none">
                 <Typography color="inherit" paragraph sx={{ lineHeight: '44px', fontSize: '24px', fontWeight: '400', marginBottom: '0' }}>
                   {post.lead}
                 </Typography>
