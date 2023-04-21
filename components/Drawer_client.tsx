@@ -1,7 +1,9 @@
-import { Grid, Typography, Drawer, Box, IconButton } from '@mui/material'
+import { Grid, Typography, Drawer, Box, IconButton, createTheme, ThemeProvider } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu';
 import React from 'react';
 import Link from 'next/link';
+import styled from 'styled-components'
+
 
 const drawerWidth = 240;
 const buttonSX = {
@@ -16,6 +18,14 @@ const buttonSX = {
     borderRadius: '96px',
     padding: '14px 29px',
   },
+};
+const A = styled.a`
+  textDecoration: 'none'`;
+
+const Typo = createTheme();
+
+Typo.typography.h4 = {
+  marginBottom: '30px'
 };
 
 function DrawerCompClient() {
@@ -36,11 +46,11 @@ function DrawerCompClient() {
       >
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           <Link href="/"><a style={{ textDecoration: 'none' }}><Typography sx={buttonSX}>Главная</Typography></a></Link>
-          <Link href="/profile_client"><a style={{ textDecoration: 'none' }}><Typography sx={buttonSX}>Профиль</Typography></a></Link>
-          <Link href="/profile_client"><a style={{ textDecoration: 'none' }}><Typography sx={buttonSX}>Расписание</Typography></a></Link>
-          <Link href="/profile_client"><a style={{ textDecoration: 'none' }}><Typography sx={buttonSX}>Статистика</Typography></a></Link>
-          <Link href="/profile_client"><a style={{ textDecoration: 'none' }}><Typography sx={buttonSX}>Терапия</Typography></a></Link>
-          <Link href="/profile_client"><a style={{ textDecoration: 'none' }}><Typography sx={buttonSX}>Методы терапии</Typography></a></Link>
+          <Link href="/profile_client"><A><Typography sx={buttonSX}>Профиль</Typography></A></Link>
+          <Link href="/profile_client/calendar"><A><Typography sx={buttonSX}>Расписание</Typography></A></Link>
+          <Link href="/profile_client"><A><Typography sx={buttonSX}>Статистика</Typography></A></Link>
+          <Link href="/profile_client"><A><Typography sx={buttonSX}>Терапия</Typography></A></Link>
+          <Link href="/profile_client"><A><Typography sx={buttonSX}>Методы терапии</Typography></A></Link>
 
         </Box>
       </Drawer>
@@ -63,12 +73,14 @@ function DrawerCompClient() {
           display: { xs: 'block', md: 'none' }
         }}
       >
-        <Typography sx={{ marginBottom: '30px' }}>Главная</Typography>
-        <Typography sx={{ marginBottom: '30px' }}>Профиль</Typography>
-        <Typography sx={{ marginBottom: '30px' }}>Расписание</Typography>
-        <Typography sx={{ marginBottom: '30px' }}>Статистика</Typography>
-        <Typography sx={{ marginBottom: '30px' }}>Терапия</Typography>
-        <Typography sx={{ marginBottom: '30px' }}>Методы терапии</Typography>
+        <ThemeProvider theme={Typo}>
+          <Typography>Главная</Typography>
+          <Typography>Профиль</Typography>
+          <Typography>Расписание</Typography>
+          <Typography>Статистика</Typography>
+          <Typography>Терапия</Typography>
+          <Typography>Методы терапии</Typography>
+        </ThemeProvider>
       </Drawer>
     </Grid>
   );
