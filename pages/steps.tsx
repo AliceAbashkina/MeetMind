@@ -519,8 +519,10 @@ export default function Steps() {
             </Grid>
             <Grid item pt={{ xs: 4, md:'110px !important' }} pl={{ xs: 0, md: 4 }} pb={'40px'} xs={12} md={9} sx={{ textAlign: { xs: 'center', md: 'start' } }}>
               <ThemeProvider theme={buttonM}>
-                <Button onClick={() => router.push('/steps2')}
-                  variant="text">Далее</Button>
+                <Button onClick={() => router.push('/profile_client')}
+                  variant="text">Далее клиент</Button>
+                  <Button onClick={() => router.push('/profile')}
+                  variant="text">Далее специалист</Button>
               </ThemeProvider>
             </Grid>
 
