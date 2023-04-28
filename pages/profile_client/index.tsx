@@ -86,7 +86,7 @@ export default function Profile(this: any) {
                   <Grid item xs={12} sx={{ paddingTop: '0 !important' }}>
                     <ThemeProvider theme={ProfileHeader}>
                       <Typography variant="h6" sx={{marginBottom:'20px'}}>Банковские карты</Typography>
-                      <img src="card_add.png" style={{width:'30px'}}/>
+                      <img src="card_add.png" style={{width:'30px', cursor: 'pointer'}}/>
                       <Typography variant="h6" sx={{ marginTop: '29px', marginBottom: '20px' }}>Сертификаты и промокоды</Typography>
                       <TextField sx={{ width: '300px' }}
                         id="outlined-basic" label="" variant="outlined" />
