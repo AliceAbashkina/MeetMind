@@ -134,33 +134,8 @@ export default function Steps() {
         <Grid sx={{ width: '100vw', height: '100%', backgroundColor: '#f9f7ff' }}>
           <Grid container columns={12} spacing={{ md: 4, xs: 0 }} sx={{ marginTop: '0 !important', maxWidth: { lg: '80%', xs: 'calc(100% - 40px)', xl: '1440px' }, marginLeft: { xs: '20px', lg: '10%', xl: 'auto' }, marginRight: { xs: '20px', lg: '10%', xl: 'auto' }, minHeight: '100%' }} >
 
-            <Grid pt={{ xs: 4 }} pl={{ xs: '0 !important', md: 4 }} item xs={12} md={3} >
-              <ThemeProvider theme={themeS}>
-                <Typography variant='h3' sx={{ fontFamily: 'RobotoThin', fontWeight: 600, textAlign: 'center', marginTop: '46px', marginBottom: '20px', color: '#4E4E4E' }}>Шаг 1. Персональные данные</Typography>
-              </ThemeProvider>
-              <Grid item xs={12} sx={{ width: '100%', background: '#FFA630', height: '7px', borderRadius: '18px' }} />
-            </Grid>
-            <Grid pt={{ xs: 4 }} pl={{ xs: 0, md: 4 }} item xs={3} sx={{ display: { xs: 'none', md: 'block' } }} >
-              <ThemeProvider theme={themeS}>
-                <Typography sx={{ opacity: 0.5 }} variant='h3'>Шаг 2. Личные вопросы</Typography>
-              </ThemeProvider>
-              <Grid item sx={{ background: '#D9D9D9', height: '7px', width: '100%', borderRadius: '18px' }} />
-            </Grid>
-            <Grid pt={{ xs: 4 }} pl={{ xs: 0, md: 4 }} item xs={3} sx={{ display: { xs: 'none', md: 'block' } }} >
-              <ThemeProvider theme={themeS}>
-                <Typography sx={{ opacity: 0.5 }} variant='h3'>Шаг 3. Выбор специалиста</Typography>
-              </ThemeProvider>
-              <Grid item sx={{ background: '#D9D9D9', height: '7px', width: '100%', borderRadius: '18px' }} />
-            </Grid>
-            <Grid pt={{ xs: 4 }} pl={{ xs: 0, md: 4 }} item xs={3} sx={{ display: { xs: 'none', md: 'block' } }}>
-              <ThemeProvider theme={themeS}>
-                <Typography sx={{ opacity: 0.5 }} variant='h3'>Шаг 4. Способ оплаты</Typography>
-              </ThemeProvider>
-              <Grid item sx={{ background: '#D9D9D9', height: '7px', width: '100%', borderRadius: '18px' }} />
-            </Grid>
-
-            <Grid xs={12} pt={{ xs: 4, md: '30px !important' }} sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' } }}>
-              <Grid item pl={{ xs: '0 !important' }} xs={12} md={3} pt={{ xs: 0, md: '16px' }} sx={{ textAlign: { xs: 'center', md: 'start' }, mt: { xs: 4, md: 0 } }}>
+            <Grid xs={12} pt={{ xs: 4, md: '60px !important' }} sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' } }}>
+              <Grid item pl={{ xs: '0 !important' }} xs={12} md={3} pt={{ xs: 0, md: '16ыpx' }} sx={{ textAlign: { xs: 'center', md: 'start' }, mt: { xs: 4, md: 0 } }}>
                 <ThemeProvider theme={themeS}>
                   <Typography variant='h4'>Как Вас зовут?</Typography>
                 </ThemeProvider>
@@ -545,7 +520,7 @@ export default function Steps() {
             <Grid item pt={{ xs: 4, md:'110px !important' }} pl={{ xs: 0, md: 4 }} pb={'40px'} xs={12} md={9} sx={{ textAlign: { xs: 'center', md: 'start' } }}>
               <ThemeProvider theme={buttonM}>
                 <Button onClick={() => router.push('/steps2')}
-                  variant="text">Шаг 2. Личные вопросы</Button>
+                  variant="text">Далее</Button>
               </ThemeProvider>
             </Grid>
 
