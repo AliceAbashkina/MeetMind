@@ -49,7 +49,9 @@ function DrawerCompClient() {
           <Link href="/profile_client"><A><Typography sx={buttonSX}>Профиль</Typography></A></Link>
           <Link href="/profile_client/calendar"><A><Typography sx={buttonSX}>Расписание</Typography></A></Link>
           <Link href="/profile_client"><A><Typography sx={buttonSX}>Статистика</Typography></A></Link>
-          <Link href="/profile_client"><A><Typography sx={buttonSX}>Терапия</Typography></A></Link>
+          <Link href="/profile_client"><A><Typography sx={buttonSX}>Личная терапия</Typography></A></Link>
+          <Link href="/profile_client"><A><Typography sx={buttonSX}>Парная терапия</Typography></A></Link>
+          <Link href="/profile_client"><A><Typography sx={buttonSX}>Групповая терапия</Typography></A></Link>
           <Link href="/profile_client"><A><Typography sx={buttonSX}>Методы терапии</Typography></A></Link>
 
         </Box>
