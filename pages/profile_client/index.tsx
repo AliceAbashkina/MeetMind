@@ -8,6 +8,11 @@ import DrawerCompClient from '../../components/Drawer_client';
 import ProfileHeader from '../../components/Headers/ProfileHeader';
 import buttonM from '../../components/Buttons/ButtonMedium';
 import PropTypes from 'prop-types';
+import MiniCard from "../../components/card/miniCard";
+import styled from 'styled-components';
+import {useState}from 'react';
+
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -46,6 +51,86 @@ export default function Profile(this: any) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  interface ICardStateElem{
+    nums: string;
+    dateExpired: string;
+    backgroundColor: string;
+    cardType: "mir" | "mastercard" | "visa";
+  }
+
+
+
+  const [cardsState, setCardsState] = useState<ICardStateElem[] | []>([]);
+
+
+  function generateRandomNums():string{
+    // random nums array
+    const randomNum: Array<string | number> = [];
+    // generate random nums cycle - do not defensed
+    for(let i = 0; i <= 19; i++){
+      if(i === 5 || i === 10 || i === 15){
+        randomNum[i] = " ";
+        continue;
+      }
+      randomNum[i] = Math.trunc(1 + Math.random() * (10 - 1));
+    }
+    // hide 5 - 12 symbols of nums
+    for(let i = 6; i <= 14; i++ ){
+      if(i === 10){
+        continue;
+      }
+      randomNum[i] = "*";
+    }
+    return randomNum.join("");
+  }
+
+
+  function generateRandomDateExpired():string{
+    const monthExpired:number = Math.trunc(1 + Math.random() * (12 - 1));
+    const dayExpired:number = Math.trunc(1 + Math.random() * (30 -1));
+    return monthExpired + "/" + dayExpired;
+  }
+
+  function generateRandomCardType():"mir" | "mastercard" | "visa" {
+    const cardType:number = Math.trunc(1 + Math.random() * (3-1));
+    switch (cardType){
+      case 1:
+        return "mir";
+      case 2:
+        return "visa";
+      default:
+        return "visa";
+    }
+  }
+
+  function generateRandomCardBackground():string{
+    // array of some colors to generate cards
+    const randomColorsArray = ["#76C1B1", "#514573", "#FFA630", "#8664E8", "#CBC7FC", "#7118B7"];
+    const randomNum = Math.trunc(0 + Math.random() * (5-0));
+    return randomColorsArray[randomNum];
+  }
+
+
+  function handleAddCard(){
+
+
+    // creating card buff object data to put its into state
+    const cardObjectData:ICardStateElem = {
+      nums: generateRandomNums(),
+      cardType: generateRandomCardType(),
+      backgroundColor: generateRandomCardBackground(),
+      dateExpired: generateRandomDateExpired(),
+    }
+    console.log(cardObjectData);
+    setCardsState(cardsState.concat(cardObjectData));
+
+  }
+
+
+
+
+
   return (
 
     <Grid item sx={{ maxWidth: { lg: '80%', xs: 'calc(100% - 40px)', xl: '1440px' }, marginLeft: { xs: '20px', lg: '10%', xl: 'auto' }, marginRight: { xs: '20px', lg: '10%', xl: 'auto' }, height: 'auto' }}>
@@ -86,7 +171,24 @@ export default function Profile(this: any) {
                   <Grid item xs={12} sx={{ paddingTop: '0 !important' }}>
                     <ThemeProvider theme={ProfileHeader}>
                       <Typography variant="h6" sx={{marginBottom:'20px'}}>Банковские карты</Typography>
-                      <img src="card_add.png" style={{width:'30px', cursor: 'pointer'}}/>
+                      <BankCardsWrapper>
+                        {
+                          cardsState.length === 0 ?
+                              null
+                              :
+                              <>
+                                {
+                                  cardsState.map((elem:ICardStateElem)=>{
+                                    return <MiniCard nums={elem.nums} dateExpire={elem.dateExpired} cardPaymentType={elem.cardType} backgroundColor={elem.backgroundColor} key={cardsState.indexOf(elem).toString()}/>
+                                  })
+                                }
+                              </>
+
+                        }
+                        <img src="card_add.png" style={{width:'30px', cursor: 'pointer'}} onClick={handleAddCard}/>
+                      </BankCardsWrapper>
+
+
                       <Typography variant="h6" sx={{ marginTop: '29px', marginBottom: '20px' }}>Сертификаты и промокоды</Typography>
                       <TextField sx={{ width: '300px' }}
                         id="outlined-basic" label="" variant="outlined" />
@@ -106,3 +208,10 @@ export default function Profile(this: any) {
     </Grid>
   );
 }
+
+
+
+const BankCardsWrapper = styled.div`
+  display: flex;
+  align-items: center;   
+`
