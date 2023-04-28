@@ -78,7 +78,9 @@ function DrawerCompClient() {
           <Typography>Профиль</Typography>
           <Typography>Расписание</Typography>
           <Typography>Статистика</Typography>
-          <Typography>Терапия</Typography>
+          <Typography>Личная терапия</Typography>
+          <Typography>Парная терапии</Typography>
+          <Typography>Групповая терапии</Typography>
           <Typography>Методы терапии</Typography>
         </ThemeProvider>
       </Drawer>
