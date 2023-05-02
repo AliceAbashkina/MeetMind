@@ -61,6 +61,7 @@ export default function Verify(this: any) {
       let quq= Number(buff);
   }, [router.query]);
 
+
   function handleChangePassword(e: any) {
     setPassword(e.target.value)
     handleSubmit(password)
@@ -213,7 +214,7 @@ export default function Verify(this: any) {
             <Grid item xs={1} sx={{ display: { xs: 'none', md: 'flex' }, paddingLeft: '0 !important' }}></Grid>
             <Grid item md={5} xs={12}><Typography sx={{ maxWidth: { xs: '383px', xl: '100%' }, placeSelf: 'flex-start', fontSize: { xs: '20px !important' }, marginBottom: '30px' }} >Подтверждение телефона
               <br /><span style={{ fontFamily: 'RobotoThin', fontWeight: '700' }}><Div>Введите код из СМС-сообщения,
-                <br />отправленного на номер +{telephone}</Div></span></Typography>
+                <br />отправленного на номер +{telephone} {code}</Div></span></Typography>
               <Grid style={{ display: 'flex', flexDirection: 'column' }}>
                 <Grid>
                   <TextField id='firstNumber'
