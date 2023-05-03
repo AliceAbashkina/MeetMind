@@ -1,7 +1,7 @@
 import styles from '../../styles/Home.module.css'
 import ResponsiveAppBarProfile from '../../components/BarProfile'
 import Footer from '../../components/Footer'
-import { Grid, Typography, Button, TextField, createTheme, ThemeProvider, Drawer, Box, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Avatar, IconButton, MenuItem, Tabs, Tab } from '@mui/material'
+import { Grid, Typography, Button, TextField, ThemeProvider, Box, Tabs, Tab } from '@mui/material'
 import * as React from 'react';
 import 'react-phone-input-2/lib/style.css'
 import DrawerCompClient from '../../components/Drawer_client';
