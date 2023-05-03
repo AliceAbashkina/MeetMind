@@ -61,7 +61,7 @@ export default function Profile(this: any) {
 
 
 
-  const [cardsState, setCardsState] = useState<ICardStateElem[] | []>([]);
+  const [cardsState, setCardsState] = useState<ICardStateElem[]>([]);
 
 
   function generateRandomNums():string{
