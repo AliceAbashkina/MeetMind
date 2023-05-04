@@ -7,44 +7,11 @@ import 'react-phone-input-2/lib/style.css'
 import DrawerCompClient from '../../components/Drawer_client';
 import ProfileHeader from '../../components/Headers/ProfileHeader';
 import buttonM from '../../components/Buttons/ButtonMedium';
-import PropTypes from 'prop-types';
 import MiniCard from "../../components/card/miniCard";
 import styled from 'styled-components';
 import {useState}from 'react';
-
-
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
+import TabPanel from '../../components/tab/TabPanel';
+import a11yProps from "../../components/tab/a11yProps";
 
 export default function Profile(this: any) {
   const [value, setValue] = React.useState(0);
@@ -126,9 +93,6 @@ export default function Profile(this: any) {
     setCardsState(cardsState.concat(cardObjectData));
 
   }
-
-
-
 
 
   return (
