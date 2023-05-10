@@ -51,7 +51,7 @@ async function callAPI() {
     password: password,
   };
   console.log(User)
-  const response = await fetch('https://89.110.53.157:19525/v1/login',   {
+  const response = await fetch('http://26.208.21.111:8210/v1/login',   {
     method: 'POST',
     mode: 'cors',
     body: JSON.stringify(User),
@@ -62,7 +62,7 @@ async function callAPI() {
   }
   else{
     setTextAuto("Успешно!")
-    router.push('/')
+    router.push('/profile_client')
   }
 console.log(json)
   return json;

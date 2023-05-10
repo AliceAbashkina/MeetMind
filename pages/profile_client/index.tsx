@@ -9,17 +9,43 @@ import ProfileHeader from '../../components/Headers/ProfileHeader';
 import buttonM from '../../components/Buttons/ButtonMedium';
 import MiniCard from "../../components/card/miniCard";
 import styled from 'styled-components';
-import {useState}from 'react';
+import { useState } from 'react';
 import TabPanel from '../../components/tab/TabPanel';
 import a11yProps from "../../components/tab/a11yProps";
+import router from 'next/router';
+import { type } from 'os';
+
+const [idUser, setID] = useState(0);
+const [data, setData] = useState();
+React.useEffect(() => {
+  let buff = router.query.id;
+  let quq = Number(buff);
+  setID(quq)
+}, [router.query]);
+async function callAPI() {
+  const response = await fetch('http://26.208.21.111:8210/v1/getUserInfo', {
+    method: 'POST',
+    mode: 'cors',
+    body: JSON.stringify(user),
+  });
+  const json = await response.json();
+  setData(json)
+  return json;
+}
+console.log(callAPI().then(data => {
+}).catch(err => {
+  console.log(err);
+}))
 
 export default function Profile(this: any) {
   const [value, setValue] = React.useState(0);
+
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  interface ICardStateElem{
+  interface ICardStateElem {
     nums: string;
     dateExpired: string;
     backgroundColor: string;
@@ -29,22 +55,24 @@ export default function Profile(this: any) {
 
 
   const [cardsState, setCardsState] = useState<ICardStateElem[]>([]);
+  let user = {
+    user_id: idUser,
+  };
 
-
-  function generateRandomNums():string{
+  function generateRandomNums(): string {
     // random nums array
     const randomNum: Array<string | number> = [];
     // generate random nums cycle - do not defensed
-    for(let i = 0; i <= 19; i++){
-      if(i === 5 || i === 10 || i === 15){
+    for (let i = 0; i <= 19; i++) {
+      if (i === 5 || i === 10 || i === 15) {
         randomNum[i] = " ";
         continue;
       }
       randomNum[i] = Math.trunc(1 + Math.random() * (10 - 1));
     }
     // hide 5 - 12 symbols of nums
-    for(let i = 6; i <= 14; i++ ){
-      if(i === 10){
+    for (let i = 6; i <= 14; i++) {
+      if (i === 10) {
         continue;
       }
       randomNum[i] = "*";
@@ -53,15 +81,15 @@ export default function Profile(this: any) {
   }
 
 
-  function generateRandomDateExpired():string{
-    const monthExpired:number = Math.trunc(1 + Math.random() * (12 - 1));
-    const dayExpired:number = Math.trunc(1 + Math.random() * (30 -1));
+  function generateRandomDateExpired(): string {
+    const monthExpired: number = Math.trunc(1 + Math.random() * (12 - 1));
+    const dayExpired: number = Math.trunc(1 + Math.random() * (30 - 1));
     return monthExpired + "/" + dayExpired;
   }
 
-  function generateRandomCardType():"mir" | "mastercard" | "visa" {
-    const cardType:number = Math.trunc(1 + Math.random() * (3-1));
-    switch (cardType){
+  function generateRandomCardType(): "mir" | "mastercard" | "visa" {
+    const cardType: number = Math.trunc(1 + Math.random() * (3 - 1));
+    switch (cardType) {
       case 1:
         return "mir";
       case 2:
@@ -71,19 +99,19 @@ export default function Profile(this: any) {
     }
   }
 
-  function generateRandomCardBackground():string{
+  function generateRandomCardBackground(): string {
     // array of some colors to generate cards
     const randomColorsArray = ["#76C1B1", "#514573", "#FFA630", "#8664E8", "#CBC7FC", "#7118B7"];
-    const randomNum = Math.trunc(0 + Math.random() * (5-0));
+    const randomNum = Math.trunc(0 + Math.random() * (5 - 0));
     return randomColorsArray[randomNum];
   }
 
 
-  function handleAddCard(){
+  function handleAddCard() {
 
 
     // creating card buff object data to put its into state
-    const cardObjectData:ICardStateElem = {
+    const cardObjectData: ICardStateElem = {
       nums: generateRandomNums(),
       cardType: generateRandomCardType(),
       backgroundColor: generateRandomCardBackground(),
@@ -94,6 +122,8 @@ export default function Profile(this: any) {
 
   }
 
+
+  console.log('dsds')
 
   return (
 
@@ -117,7 +147,7 @@ export default function Profile(this: any) {
                 <TabPanel value={value} index={0}>
                   <Grid item xs={12} >
                     <ThemeProvider theme={ProfileHeader}>
-                      <Typography variant="h3">Имя:</Typography>
+                      <Typography variant="h3">Имя: {data.user_name} </Typography>
                       <Typography variant="h3" sx={{ marginTop: '29px' }}>Фамилия:</Typography>
                       <Typography variant="h3" sx={{ marginTop: '29px' }}>Отчество:</Typography>
                       <Typography variant="h3" sx={{ marginTop: '29px' }}>Дата рождения</Typography>
@@ -134,22 +164,22 @@ export default function Profile(this: any) {
                 <TabPanel value={value} index={1}>
                   <Grid item xs={12} sx={{ paddingTop: '0 !important' }}>
                     <ThemeProvider theme={ProfileHeader}>
-                      <Typography variant="h6" sx={{marginBottom:'20px'}}>Банковские карты</Typography>
+                      <Typography variant="h6" sx={{ marginBottom: '20px' }}>Банковские карты</Typography>
                       <BankCardsWrapper>
                         {
                           cardsState.length === 0 ?
-                              null
-                              :
-                              <>
-                                {
-                                  cardsState.map((elem:ICardStateElem)=>{
-                                    return <MiniCard nums={elem.nums} dateExpire={elem.dateExpired} cardPaymentType={elem.cardType} backgroundColor={elem.backgroundColor} key={cardsState.indexOf(elem).toString()}/>
-                                  })
-                                }
-                              </>
+                            null
+                            :
+                            <>
+                              {
+                                cardsState.map((elem: ICardStateElem) => {
+                                  return <MiniCard nums={elem.nums} dateExpire={elem.dateExpired} cardPaymentType={elem.cardType} backgroundColor={elem.backgroundColor} key={cardsState.indexOf(elem).toString()} />
+                                })
+                              }
+                            </>
 
                         }
-                        <img src="card_add.png" style={{width:'30px', cursor: 'pointer'}} onClick={handleAddCard}/>
+                        <img src="card_add.png" style={{ width: '30px', cursor: 'pointer' }} onClick={handleAddCard} />
                       </BankCardsWrapper>
 
 
@@ -158,7 +188,7 @@ export default function Profile(this: any) {
                         id="outlined-basic" label="" variant="outlined" />
                     </ThemeProvider>
                     <ThemeProvider theme={buttonM}>
-                      <Button sx={{marginLeft:'10px'}}>
+                      <Button sx={{ marginLeft: '10px' }}>
                         Активировать</Button>
                     </ThemeProvider>
                   </Grid>

@@ -28,6 +28,7 @@ export default function Verify(this: any) {
 
   const [color, setcolor] = useState('#4E4E4E');
   const [password, setPassword] = useState('');
+  const [idUser, setID] = useState(0);
   const [errors, setError] = useState(false);
   const [success, setSucess] = useState(false);
   const [primary, setPrimary] = useState(true);
@@ -36,9 +37,8 @@ export default function Verify(this: any) {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-
   let user = {
-    userid: userid,
+    userid: idUser,
     code: code,
     password: password,
   };
@@ -52,13 +52,13 @@ export default function Verify(this: any) {
   `
 
   useEffect(() => {
-    var local;
     setType(router.query.type);
     console.log(type)
     setCode(router.query.code);
     setTelephone(router.query.telephone);
-      let buff= router.query.id[0];
+      let buff= router.query.id;
       let quq= Number(buff);
+      setID(quq)
   }, [router.query]);
 
 
@@ -149,13 +149,15 @@ export default function Verify(this: any) {
         setcolor('#4E4E4E !important')
         callAPI().then(data => {
           setTimeout(() => {
+            console.log(idUser)
             router.push({
-              pathname: '/authorization'})
-          }, 500);
+              pathname: '/steps',
+              query: { id: data.user_id }}, '/steps')
+            }, 500);
         }).catch(err => {
           console.log(err);
         });
-        router.push('/authorization');
+       // router.push('/authorization');
       }
       else {
         console.log('wrongcode')
@@ -187,13 +189,12 @@ export default function Verify(this: any) {
   }
   
   async function callAPI() {
-    const response = await fetch('https://89.110.53.157:19525/v1/userActivate', {
+    const response = await fetch('http://26.208.21.111:8210/v1/userActivate', {
       method: 'POST',
       mode: 'cors',
       body: JSON.stringify(user),
     });
     const json = await response.json();
-
     return json;
   }
 
@@ -224,7 +225,7 @@ export default function Verify(this: any) {
                         height: '80px',
                         width: '60px', padding: 0, color: '#4E4E4E', fontSize: '40px', fontFamily: 'Roboto', textAlign: 'center'
                       },
-                      ".MuiOutlinedInput-notchedOutline": { border: '1px solid #FFA630 !important', borderRadius: '4px' }
+                      ".MuiOutlinedInput-notchedOutline": { border: '1px solid #FFA630 !important', borderRadius: '4px', height: '80px' }
                     }} label="" variant='outlined'
                     value={value0} onChange={(e) => handleChange(e, 0)} />
                   <TextField id='secondNumber'
@@ -233,7 +234,7 @@ export default function Verify(this: any) {
                       "input": {
                         height: '80px',
                         width: '60px', borderRadius: '4px', padding: 0, color: '#4E4E4E', fontSize: '40px', fontFamily: 'Roboto', textAlign: 'center'
-                      }, ".MuiOutlinedInput-notchedOutline": { border: '1px solid #FFA630 !important', borderRadius: '4px' },
+                      }, ".MuiOutlinedInput-notchedOutline": { border: '1px solid #FFA630 !important', borderRadius: '4px', height: '80px' },
                     }} InputProps={{ inputProps: { maxLength: 1 } }}
                     label="" variant="outlined" value={value1} onChange={(e) => handleChange(e, 1)} />
                   <TextField id='thirdNumber'
@@ -242,14 +243,14 @@ export default function Verify(this: any) {
                       "input": {
                         height: '80px',
                         width: '60px', borderRadius: '4px', padding: 0, color: '#4E4E4E', fontSize: '40px', fontFamily: 'Roboto', textAlign: 'center'
-                      }, ".MuiOutlinedInput-notchedOutline": { border: '1px solid #FFA630 !important', borderRadius: '4px' },
+                      }, ".MuiOutlinedInput-notchedOutline": { border: '1px solid #FFA630 !important', borderRadius: '4px', height: '80px' },
                     }} InputProps={{ inputProps: { maxLength: 1 } }}
                     label="" variant="outlined" value={value2} onChange={(e) => handleChange(e, 2)} />
                   <TextField id='fourthNumber' sx={{
                     "input": {
                       height: '80px',
                       width: '60px', borderRadius: '4px', padding: 0, color: '#4E4E4E', fontSize: '40px', fontFamily: 'Roboto', textAlign: 'center'
-                    }, ".MuiOutlinedInput-notchedOutline": { border: '1px solid #FFA630 !important', borderRadius: '4px' },
+                    }, ".MuiOutlinedInput-notchedOutline": { border: '1px solid #FFA630 !important', borderRadius: '4px',height: '80px' },
                   }} InputProps={{ inputProps: { maxLength: 1 } }}
                     label="" variant="outlined" value={value3} onChange={(e) => handleChange(e, 3)}
                   />
