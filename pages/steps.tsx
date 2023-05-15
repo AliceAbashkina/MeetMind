@@ -56,6 +56,8 @@ export default function Steps() {
     console.log(router.query)
     let quq = Number(buff);
     setUserID(quq)
+    setUserID(23)
+
     console.log(quq)
 
   }, [router.query]);
@@ -241,7 +243,7 @@ export default function Steps() {
       ]
     }
     console.log(User)
-    const response = await fetch('http://26.208.21.111:8210/v1/saveUserInfo', {
+    const response = await fetch('http://localhost:8210/v1/saveUserInfo', {
       method: 'POST',
       mode: 'cors',
       body: JSON.stringify(User),
@@ -249,8 +251,8 @@ export default function Steps() {
     const json = await response.json();
     console.log(idUser)
     router.push({
-      pathname: '/profile_client',
-      query: { id: idUser }}, '/profile_client');
+      pathname: '/profile_client/load',
+      query: { id: 23 }}, '/profile_client/load');
       return json;
   }
 

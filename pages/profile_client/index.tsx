@@ -12,38 +12,36 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import TabPanel from '../../components/tab/TabPanel';
 import a11yProps from "../../components/tab/a11yProps";
-import router from 'next/router';
-import { type } from 'os';
-
-const [idUser, setID] = useState(0);
-const [data, setData] = useState();
-React.useEffect(() => {
-  let buff = router.query.id;
-  let quq = Number(buff);
-  setID(quq)
-}, [router.query]);
-async function callAPI() {
-  const response = await fetch('http://26.208.21.111:8210/v1/getUserInfo', {
-    method: 'POST',
-    mode: 'cors',
-    body: JSON.stringify(user),
-  });
-  const json = await response.json();
-  setData(json)
-  return json;
-}
-console.log(callAPI().then(data => {
-}).catch(err => {
-  console.log(err);
-}))
+import { useRouter } from 'next/router';
 
 export default function Profile(this: any) {
   const [value, setValue] = React.useState(0);
+  const [data, setData] = React.useState<string | string[] | any>();
+  const [buff, setBuff] = React.useState<string | string[] | any>();
+  const [local, setLocal] = React.useState<string | string[] | any>();
 
+
+  const router = useRouter();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  React.useEffect(() => {
+    if (router.query.user) {
+      setBuff(router.query.user);
+      if (buff) {
+        setData(JSON.parse(buff));
+        localStorage.setItem('user', buff);
+      }
+    }
+  }, [router.query]);
+
+  React.useEffect(() => {
+    let buff = localStorage.getItem('user');
+    setData(JSON.parse(buff));
+  }, [])
+
 
   interface ICardStateElem {
     nums: string;
@@ -52,13 +50,7 @@ export default function Profile(this: any) {
     cardType: "mir" | "mastercard" | "visa";
   }
 
-
-
   const [cardsState, setCardsState] = useState<ICardStateElem[]>([]);
-  let user = {
-    user_id: idUser,
-  };
-
   function generateRandomNums(): string {
     // random nums array
     const randomNum: Array<string | number> = [];
@@ -121,90 +113,87 @@ export default function Profile(this: any) {
     setCardsState(cardsState.concat(cardObjectData));
 
   }
+  if (data) {
+    return (
+      <Grid item sx={{ maxWidth: { lg: '80%', xs: 'calc(100% - 40px)', xl: '1440px' }, marginLeft: { xs: '20px', lg: '10%', xl: 'auto' }, marginRight: { xs: '20px', lg: '10%', xl: 'auto' }, height: 'auto' }}>
+        <ResponsiveAppBarProfile />
+        <div className={styles.main}>
+
+          <Grid sx={{ width: '100vw', backgroundColor: '#f9f7ff', height: '100%' }}>
+            <Grid container columns={12} spacing={{ md: 4, xs: 0 }} sx={{ marginTop: '0 !important', maxWidth: { lg: '80%', xs: 'calc(100% - 40px)', xl: '1440px' }, marginLeft: { xs: '20px', lg: '10%', xl: 'auto' }, marginRight: { xs: '20px', lg: '10%', xl: 'auto' }, minHeight: 'calc(100vh - 70px - 81px)' }}>
+              <DrawerCompClient />
+              <Grid item xs={1} sx={{ display: { xs: 'none', lg: 'flex' }, paddingTop: 0 }}></Grid>
+
+              <Grid item xs={8} sx={{ paddingTop: '80px !important' }}>
+                <Grid item sx={{ display: 'flex', flexDirection: 'row' }}>
+                  <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                    <Tab label="Информация" {...a11yProps(0)} />
+                    <Tab label="Способ оплаты" {...a11yProps(1)} />
+                  </Tabs>
+                </Grid>
+                <Grid container columns={12} sx={{ paddingTop: '0' }}>
+                  <TabPanel value={value} index={0}>
+                    <Grid item xs={12} >
+                      <ThemeProvider theme={ProfileHeader}>
+                        <Typography variant="h3">Имя: {data.user_name} </Typography>
+                        <Typography variant="h3" sx={{ marginTop: '29px' }}>Фамилия:</Typography>
+                        <Typography variant="h3" sx={{ marginTop: '29px' }}>Отчество:</Typography>
+                        <Typography variant="h3" sx={{ marginTop: '29px' }}>Дата рождения {data.birthday.split('T')[0]}</Typography>
+                        <Typography variant="h3" sx={{ marginTop: '29px' }}>Пол</Typography>
+                        <Typography variant="h3" sx={{ marginTop: '29px' }}>E-mail: {data.email}</Typography>
+                        <Typography variant="h3" sx={{ marginTop: '29px' }}>Телефон:</Typography>
+                      </ThemeProvider>
+                      <ThemeProvider theme={buttonM}>
+                        <Button sx={{ marginTop: '40px' }} >
+                          Сохранить</Button>
+                      </ThemeProvider>
+                    </Grid>
+                  </TabPanel>
+                  <TabPanel value={value} index={1}>
+                    <Grid item xs={12} sx={{ paddingTop: '0 !important' }}>
+                      <ThemeProvider theme={ProfileHeader}>
+                        <Typography variant="h6" sx={{ marginBottom: '20px' }}>Банковские карты</Typography>
+                        <BankCardsWrapper>
+                          {
+                            cardsState.length === 0 ?
+                              null
+                              :
+                              <>
+                                {
+                                  cardsState.map((elem: ICardStateElem) => {
+                                    return <MiniCard nums={elem.nums} dateExpire={elem.dateExpired} cardPaymentType={elem.cardType} backgroundColor={elem.backgroundColor} key={cardsState.indexOf(elem).toString()} />
+                                  })
+                                }
+                              </>
+
+                          }
+                          <img src="card_add.png" style={{ width: '30px', cursor: 'pointer' }} onClick={handleAddCard} />
+                        </BankCardsWrapper>
 
 
-  console.log('dsds')
-
-  return (
-
-    <Grid item sx={{ maxWidth: { lg: '80%', xs: 'calc(100% - 40px)', xl: '1440px' }, marginLeft: { xs: '20px', lg: '10%', xl: 'auto' }, marginRight: { xs: '20px', lg: '10%', xl: 'auto' }, height: 'auto' }}>
-      <ResponsiveAppBarProfile />
-      <div className={styles.main}>
-
-        <Grid sx={{ width: '100vw', backgroundColor: '#f9f7ff', height: '100%' }}>
-          <Grid container columns={12} spacing={{ md: 4, xs: 0 }} sx={{ marginTop: '0 !important', maxWidth: { lg: '80%', xs: 'calc(100% - 40px)', xl: '1440px' }, marginLeft: { xs: '20px', lg: '10%', xl: 'auto' }, marginRight: { xs: '20px', lg: '10%', xl: 'auto' }, minHeight: 'calc(100vh - 70px - 81px)' }}>
-            <DrawerCompClient />
-            <Grid item xs={1} sx={{ display: { xs: 'none', lg: 'flex' }, paddingTop: 0 }}></Grid>
-
-            <Grid item xs={8} sx={{ paddingTop: '80px !important' }}>
-              <Grid item sx={{ display: 'flex', flexDirection: 'row' }}>
-                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                  <Tab label="Информация" {...a11yProps(0)} />
-                  <Tab label="Способ оплаты" {...a11yProps(1)} />
-                </Tabs>
-              </Grid>
-              <Grid container columns={12} sx={{ paddingTop: '0' }}>
-                <TabPanel value={value} index={0}>
-                  <Grid item xs={12} >
-                    <ThemeProvider theme={ProfileHeader}>
-                      <Typography variant="h3">Имя: {data.user_name} </Typography>
-                      <Typography variant="h3" sx={{ marginTop: '29px' }}>Фамилия:</Typography>
-                      <Typography variant="h3" sx={{ marginTop: '29px' }}>Отчество:</Typography>
-                      <Typography variant="h3" sx={{ marginTop: '29px' }}>Дата рождения</Typography>
-                      <Typography variant="h3" sx={{ marginTop: '29px' }}>Пол</Typography>
-                      <Typography variant="h3" sx={{ marginTop: '29px' }}>E-mail:</Typography>
-                      <Typography variant="h3" sx={{ marginTop: '29px' }}>Телефон:</Typography>
-                    </ThemeProvider>
-                    <ThemeProvider theme={buttonM}>
-                      <Button sx={{ marginTop: '40px' }} >
-                        Сохранить</Button>
-                    </ThemeProvider>
-                  </Grid>
-                </TabPanel>
-                <TabPanel value={value} index={1}>
-                  <Grid item xs={12} sx={{ paddingTop: '0 !important' }}>
-                    <ThemeProvider theme={ProfileHeader}>
-                      <Typography variant="h6" sx={{ marginBottom: '20px' }}>Банковские карты</Typography>
-                      <BankCardsWrapper>
-                        {
-                          cardsState.length === 0 ?
-                            null
-                            :
-                            <>
-                              {
-                                cardsState.map((elem: ICardStateElem) => {
-                                  return <MiniCard nums={elem.nums} dateExpire={elem.dateExpired} cardPaymentType={elem.cardType} backgroundColor={elem.backgroundColor} key={cardsState.indexOf(elem).toString()} />
-                                })
-                              }
-                            </>
-
-                        }
-                        <img src="card_add.png" style={{ width: '30px', cursor: 'pointer' }} onClick={handleAddCard} />
-                      </BankCardsWrapper>
-
-
-                      <Typography variant="h6" sx={{ marginTop: '29px', marginBottom: '20px' }}>Сертификаты и промокоды</Typography>
-                      <TextField sx={{ width: '300px' }}
-                        id="outlined-basic" label="" variant="outlined" />
-                    </ThemeProvider>
-                    <ThemeProvider theme={buttonM}>
-                      <Button sx={{ marginLeft: '10px' }}>
-                        Активировать</Button>
-                    </ThemeProvider>
-                  </Grid>
-                </TabPanel>
+                        <Typography variant="h6" sx={{ marginTop: '29px', marginBottom: '20px' }}>Сертификаты и промокоды</Typography>
+                        <TextField sx={{ width: '300px' }}
+                          id="outlined-basic" label="" variant="outlined" />
+                      </ThemeProvider>
+                      <ThemeProvider theme={buttonM}>
+                        <Button sx={{ marginLeft: '10px' }}>
+                          Активировать</Button>
+                      </ThemeProvider>
+                    </Grid>
+                  </TabPanel>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
-        <Footer />
-      </div>
-    </Grid>
-  );
+          <Footer />
+        </div>
+      </Grid>
+    );
+  }
+  else {
+    return (<div></div>)
+  }
 }
-
-
-
 const BankCardsWrapper = styled.div`
   display: flex;
   align-items: center;   

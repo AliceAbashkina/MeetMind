@@ -58,9 +58,7 @@ async function callAPI(typePers) {
     mode: 'cors',
     body: JSON.stringify(User),
   });
-  const json = await response.json();
-console.log(json)
-  return json;
+  return await response.json();
 }
 
   return (
