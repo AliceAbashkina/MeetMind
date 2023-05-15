@@ -30,15 +30,16 @@ export default function Profile(this: any) {
   React.useEffect(() => {
     if (router.query.user) {
       setBuff(router.query.user);
+
       if (buff) {
         setData(JSON.parse(buff));
-        localStorage.setItem('user', buff);
+        sessionStorage.setItem('user', buff);
       }
     }
   }, [router.query]);
 
   React.useEffect(() => {
-    let buff = localStorage.getItem('user');
+    let buff = sessionStorage.getItem('user');
     setData(JSON.parse(buff));
   }, [])
 
@@ -191,7 +192,7 @@ export default function Profile(this: any) {
     );
   }
   else {
-    return (<div></div>)
+    return (<div>puk</div>)
   }
 }
 const BankCardsWrapper = styled.div`

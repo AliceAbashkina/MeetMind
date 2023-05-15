@@ -13,7 +13,6 @@ export default function Load() {
     const [userID, setID] = React.useState(23);
 
     callAPI().then(data => {
-     //   console.log(data)
         router.push({
             pathname: '/profile_client',
             query: { user: JSON.stringify(data) }
