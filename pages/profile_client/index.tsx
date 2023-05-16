@@ -17,9 +17,6 @@ import { useRouter } from 'next/router';
 export default function Profile(this: any) {
   const [value, setValue] = React.useState(0);
   const [data, setData] = React.useState<string | string[] | any>();
-  const [buff, setBuff] = React.useState<string | string[] | any>();
-  const [local, setLocal] = React.useState<string | string[] | any>();
-
 
   const router = useRouter();
 
@@ -141,16 +138,16 @@ export default function Profile(this: any) {
                     <Grid item xs={12} >
                       <ThemeProvider theme={ProfileHeader}>
                         <Typography variant="h3">Имя: {data.user_name} </Typography>
-                        <Typography variant="h3" sx={{ marginTop: '29px' }}>Фамилия:</Typography>
-                        <Typography variant="h3" sx={{ marginTop: '29px' }}>Отчество:</Typography>
-                        <Typography variant="h3" sx={{ marginTop: '29px' }}>Дата рождения {data.birthday}</Typography>
+                     {/*    <Typography variant="h3" sx={{ marginTop: '29px' }}>Фамилия:</Typography>
+                        <Typography variant="h3" sx={{ marginTop: '29px' }}>Отчество:</Typography> */}
+                        <Typography variant="h3" sx={{ marginTop: '29px' }}>Дата рождения {data.birthday.split('T')[0]}</Typography>
                         <Typography variant="h3" sx={{ marginTop: '29px' }}>Пол</Typography>
                         <Typography variant="h3" sx={{ marginTop: '29px' }}>E-mail: {data.email}</Typography>
-                        <Typography variant="h3" sx={{ marginTop: '29px' }}>Телефон:</Typography>
+                        <Typography variant="h3" sx={{ marginTop: '29px' }}>Телефон: {data.phone}</Typography>
                       </ThemeProvider>
                       <ThemeProvider theme={buttonM}>
                         <Button sx={{ marginTop: '40px' }} >
-                          Сохранить</Button>
+                          Редактировать</Button>
                       </ThemeProvider>
                     </Grid>
                   </TabPanel>
