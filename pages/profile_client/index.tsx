@@ -29,14 +29,17 @@ export default function Profile(this: any) {
 
   React.useEffect(() => {
     if (router.query.user) {
-      setBuff(router.query.user);
+      let buff5 = router.query.user;
+      console.log(buff5)
+      if (buff5) {
+        setData(JSON.parse(buff5));
+        console.log(buff5)
+        console.log(data)
 
-      if (buff) {
-        setData(JSON.parse(buff));
-        sessionStorage.setItem('user', buff);
+        sessionStorage.setItem('user', buff5);
       }
     }
-  }, [router.query]);
+  }, [router.query.user]);
 
   React.useEffect(() => {
     let buff = sessionStorage.getItem('user');
@@ -114,6 +117,7 @@ export default function Profile(this: any) {
     setCardsState(cardsState.concat(cardObjectData));
 
   }
+  console.log(data)
   if (data) {
     return (
       <Grid item sx={{ maxWidth: { lg: '80%', xs: 'calc(100% - 40px)', xl: '1440px' }, marginLeft: { xs: '20px', lg: '10%', xl: 'auto' }, marginRight: { xs: '20px', lg: '10%', xl: 'auto' }, height: 'auto' }}>
@@ -139,7 +143,7 @@ export default function Profile(this: any) {
                         <Typography variant="h3">Имя: {data.user_name} </Typography>
                         <Typography variant="h3" sx={{ marginTop: '29px' }}>Фамилия:</Typography>
                         <Typography variant="h3" sx={{ marginTop: '29px' }}>Отчество:</Typography>
-                        <Typography variant="h3" sx={{ marginTop: '29px' }}>Дата рождения {data.birthday.split('T')[0]}</Typography>
+                        <Typography variant="h3" sx={{ marginTop: '29px' }}>Дата рождения {data.birthday}</Typography>
                         <Typography variant="h3" sx={{ marginTop: '29px' }}>Пол</Typography>
                         <Typography variant="h3" sx={{ marginTop: '29px' }}>E-mail: {data.email}</Typography>
                         <Typography variant="h3" sx={{ marginTop: '29px' }}>Телефон:</Typography>
@@ -192,7 +196,15 @@ export default function Profile(this: any) {
     );
   }
   else {
-    return (<div>puk</div>)
+    return (<div><Grid item sx={{ maxWidth: { lg: '80%', xs: 'calc(100% - 40px)', xl: '1440px' }, marginLeft: { xs: '20px', lg: '10%', xl: 'auto' }, marginRight: { xs: '20px', lg: '10%', xl: 'auto' }, height: 'auto' }}>
+      <ResponsiveAppBarProfile />
+      <div className={styles.main}>
+        <Grid sx={{ width: '100vw', backgroundColor: '#f9f7ff', height: '100%' }}>
+        </Grid>
+        <Footer />
+      </div>
+    </Grid>
+    </div>)
   }
 }
 const BankCardsWrapper = styled.div`

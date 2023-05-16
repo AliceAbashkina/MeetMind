@@ -56,7 +56,6 @@ export default function Steps() {
     console.log(router.query)
     let quq = Number(buff);
     setUserID(quq)
-    setUserID(23)
 
     console.log(quq)
 
@@ -252,7 +251,7 @@ export default function Steps() {
     console.log(idUser)
     router.push({
       pathname: '/profile_client/load',
-      query: { id: 23 }}, '/profile_client/load');
+      query: { id: idUser }}, '/profile_client/load');
       return json;
   }
 

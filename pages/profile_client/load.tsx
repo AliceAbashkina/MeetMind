@@ -10,16 +10,32 @@ import { useRouter } from 'next/router';
 
 export default function Load() {
     const router = useRouter();
-    const [userID, setID] = React.useState(23);
+    const [userID, setID] = React.useState();
 
-    callAPI().then(data => {
-        router.push({
-            pathname: '/profile_client',
-            query: { user: JSON.stringify(data) }
-        }, '/profile_client')
-    }).catch(err => {
-        console.log(err);
-    });
+    React.useEffect(() => {
+        if (router.query.id) {
+            setID(Number(router.query.id));
+            if (userID) {
+                sessionStorage.setItem('id', JSON.stringify(userID));
+            }
+        }
+    }, [router.query]);
+
+    React.useEffect(() => {
+        let buff = sessionStorage.getItem('id');
+
+    }, [])
+
+    if (userID) {
+        callAPI().then(data => {
+            router.push({
+                pathname: '/profile_client',
+                query: { user: JSON.stringify(data) }
+            }, '/profile_client')
+        }).catch(err => {
+            console.log(err);
+        });
+    }
 
     async function callAPI() {
         let user = {
