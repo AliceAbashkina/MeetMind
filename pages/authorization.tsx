@@ -22,6 +22,7 @@ export default function Authorization() {
   const [value, setValue] = useState<string | undefined>();
   const [active, setActive] = useState(false);
   const [textAuto, setTextAuto] = useState("Введите свой номер телефона")
+  const [visibilityText, setVisible] = useState(true);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleMouseDownPassword = (event: any) => {
@@ -51,17 +52,19 @@ async function callAPI() {
     password: password,
   };
   console.log(User)
-  const response = await fetch('http://26.208.21.111:8210/v1/login',   {
+  const response = await fetch('http://localhost:8210/v1/login',   {
     method: 'POST',
     mode: 'cors',
     body: JSON.stringify(User),
   });
   const json = await response.json();
   if(json.message=="Неверный логин или пароль"){
-    setTextAuto("Неверный логин или пароль")
+    setTextAuto('')
+    setVisible(false)
   }
   else{
     setTextAuto("Успешно!")
+    setVisible(true)
     router.push('/profile_client')
   }
 console.log(json)
@@ -82,7 +85,9 @@ console.log(json)
           <Grid item xs={1} sx={{display:{xs:'none',md:'flex'}, paddingLeft:'0 !important'}}/>
           <Grid item md={5} xs={12} sx={{paddingTop: 0, alignSelf:'start'}} mb={{xs:0, md:'40px'}}>
           
-            <Typography sx={{ fontSize: { xl: '35px', xs:'20px' },marginBottom: '30px' }}>{textAuto}</Typography>
+          <Typography sx={{ fontSize: { xl: '30px', xs:'20px' },marginBottom: '30px', color: '#e54848' }} hidden={visibilityText}>Неверный логин или пароль</Typography>
+            <Typography sx={{ fontSize: { xl: '30px', xs:'20px' },marginBottom: '30px', color: '#4E4E4E' }}>
+              {textAuto}</Typography>
             <PhoneInput regions={['ex-ussr']} containerStyle={{opacity:1}} buttonClass={styles.buttonClassInput} inputStyle={{ backgroundColor: '#f9f7ff', border: '1px solid #FFA630', borderRadius: '30px', height: '55px', fontSize:'1.2rem' }} placeholder='телефон' preferredCountries={['ru']}
             value={value}
             onChange={(newValue) => setTelephone(newValue)}
