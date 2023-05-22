@@ -61,7 +61,7 @@ export default function Blog( {list} ) {
 }
 
 export const getStaticProps = async () => {
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; //prod
 
   const setting = {
     start: 1,
@@ -69,7 +69,7 @@ export const getStaticProps = async () => {
     search: "password",
   };
 
-  const response = await fetch('https://89.110.53.157:19525/v1/listArticle', {
+  const response = await fetch('http://26.208.21.111:8210/v1/listArticle', {
     method: 'POST',
     mode: 'cors',
     body: JSON.stringify(setting),

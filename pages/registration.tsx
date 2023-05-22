@@ -38,6 +38,7 @@ export default function Registration() {
     callAPI(typePers).then(data => {
       setCode(data.confirmationCode);
       setTimeout(() => {
+        console.log(data.user_id)
       router.push({
         pathname: '/verify',
         query: { type: typePers, code: data.confirmationCode, telephone: value, id: data.user_id }}, '/verify')
@@ -52,14 +53,12 @@ async function callAPI(typePers) {
     phone: value,
     type: typePers,
   };
-  const response = await fetch('https://89.110.53.157:19525/v1/userSendVerifySMS',   {
+  const response = await fetch('http://localhost:8210/v1/userSendVerifySMS',   {
     method: 'POST',
     mode: 'cors',
     body: JSON.stringify(User),
   });
-  const json = await response.json();
-console.log(json)
-  return json;
+  return await response.json();
 }
 
   return (

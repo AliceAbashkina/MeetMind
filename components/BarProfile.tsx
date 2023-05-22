@@ -16,7 +16,7 @@ import { useRouter } from 'next/router';
 
 function ResponsiveAppBarProfile() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-const namePers='Алексей';
+  const [name, setName] = React.useState<any>();
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -77,15 +77,22 @@ const namePers='Алексей';
     prevOpen.current = open;
   }, [open]);
 
+  React.useEffect(() => {
+    let buff = localStorage.getItem('user');
+    setName(JSON.parse(buff));
+  }, [])
+
   return (
-    <AppBar position="static" style={{ background: '#FFF', boxShadow: 'none', marginTop:0, width:'100%', paddingBottom: 0, height: '70px'}}>
-      <Container style={{paddingLeft:0, paddingRight:0, maxWidth:'none'}}>
+    <AppBar position="static" style={{ background: '#FFF', boxShadow: 'none', marginTop: 0, width: '100%', paddingBottom: 0, height: '70px' }}>
+      <Container style={{ paddingLeft: 0, paddingRight: 0, maxWidth: 'none' }}>
         <Toolbar disableGutters>
 
-          <img src='../Logo.png' alt='logo' width='30px' height='53px' style={{marginTop:'auto',marginBottom:'auto', marginRight:'22px'}} 
-          onClick={()=>router.push('/')}/>
-          <Typography  onClick={()=>router.push('/')} sx={{ fontSize: { xs:'20px', md: '26px' }, mr: {xl:'34px', md: '20px'} }} variant="h1" style={{ color:'#4E4E4E', 
-          fontFamily:'Comfortaa', fontWeight:600, fontStyle:'normal', hyphens:'auto', transform: 'scaleX(1)', letterSpacing:'2px'}}>MeetMind</Typography>
+          <img src='../Logo.png' alt='logo' width='30px' height='53px' style={{ marginTop: 'auto', marginBottom: 'auto', marginRight: '22px' }}
+            onClick={() => router.push('/')} />
+          <Typography onClick={() => router.push('/')} sx={{ fontSize: { xs: '20px', md: '26px' }, mr: { xl: '34px', md: '20px' } }} variant="h1" style={{
+            color: '#4E4E4E',
+            fontFamily: 'Comfortaa', fontWeight: 600, fontStyle: 'normal', hyphens: 'auto', transform: 'scaleX(1)', letterSpacing: '2px'
+          }}>MeetMind</Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -117,57 +124,69 @@ const namePers='Алексей';
             >
             </Menu>
           </Box>
-        
+
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-          
-          <div>
-        <Button
-          ref={anchorRef}
-          id="composition-button"
-          aria-controls={open ? 'composition-menu' : undefined}
-          aria-expanded={open ? 'true' : undefined}
-          aria-haspopup="true"
-          onClick={handleToggle}
-        >
-          {namePers}
-        </Button>
-        <Popper
-          open={open}
-          anchorEl={anchorRef.current}
-          role={undefined}
-          placement="bottom-start"
-          transition
-          disablePortal
-        >
-          {({ TransitionProps, placement }) => (
-            <Grow
-              {...TransitionProps}
-              style={{
-                transformOrigin:
-                  placement === 'bottom-start' ? 'left top' : 'left bottom',
-              }}
-            >
-              <Paper>
-                <ClickAwayListener onClickAway={handleClose}>
-                  <MenuList
-                    autoFocusItem={open}
-                    id="composition-menu"
-                    aria-labelledby="composition-button"
-                    onKeyDown={handleListKeyDown}
+
+            <div>
+              {name ? (
+                <Button
+                  ref={anchorRef}
+                  id="composition-button"
+                  aria-controls={open ? 'composition-menu' : undefined}
+                  aria-expanded={open ? 'true' : undefined}
+                  aria-haspopup="true"
+                  onClick={handleToggle}
+                >
+                  {name.user_name}
+                </Button>
+              )
+                :
+                (
+                  <Button
+                    ref={anchorRef}
+                    id="composition-button"
+                    aria-haspopup="true"
                   >
-                    <MenuItem onClick={handleClose}>Profile</MenuItem>
-                    <MenuItem onClick={handleClose}>My account</MenuItem>
-                    <MenuItem onClick={handleClose}>Logout</MenuItem>
-                  </MenuList>
-                </ClickAwayListener>
-              </Paper>
-            </Grow>
-          )}
-        </Popper>
-      </div>
+                    Зарегистрироваться
+                  </Button>
+                )
+              }
+
+              <Popper
+                open={open}
+                anchorEl={anchorRef.current}
+                role={undefined}
+                placement="bottom-start"
+                transition
+                disablePortal
+              >
+                {({ TransitionProps, placement }) => (
+                  <Grow
+                    {...TransitionProps}
+                    style={{
+                      transformOrigin:
+                        placement === 'bottom-start' ? 'left top' : 'left bottom',
+                    }}
+                  >
+                    <Paper>
+                      <ClickAwayListener onClickAway={handleClose}>
+                        <MenuList
+                          autoFocusItem={open}
+                          id="composition-menu"
+                          aria-labelledby="composition-button"
+                          onKeyDown={handleListKeyDown}
+                        >
+                          <MenuItem onClick={handleClose}>Выйти</MenuItem>
+                        </MenuList>
+                      </ClickAwayListener>
+                    </Paper>
+                  </Grow>
+                )}
+              </Popper>
+            </div>
 
           </Box>
         </Toolbar>
