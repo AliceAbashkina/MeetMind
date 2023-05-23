@@ -150,7 +150,7 @@ function ResponsiveAppBarProfile() {
                     id="composition-button"
                     aria-haspopup="true"
                   >
-                    Зарегистрироваться
+                    
                   </Button>
                 )
               }

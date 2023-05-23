@@ -130,19 +130,34 @@ export default function Profile(this: any) {
                 <Grid item sx={{ display: 'flex', flexDirection: 'row' }}>
                 </Grid>
                 <Grid container columns={12} sx={{ paddingTop: '23px' }}>
-                    <Grid item xs={12} >
+                    <Grid item xs={12} sx={{ paddingTop: '0 !important' }}>
                       <ThemeProvider theme={ProfileHeader}>
-                        <Typography variant="h3">Имя: {data.user_name} </Typography>
-                     {/*    <Typography variant="h3" sx={{ marginTop: '29px' }}>Фамилия:</Typography>
-                        <Typography variant="h3" sx={{ marginTop: '29px' }}>Отчество:</Typography> */}
-                        <Typography variant="h3" sx={{ marginTop: '29px' }}>Дата рождения {data.birthday.split('T')[0]}</Typography>
-                        <Typography variant="h3" sx={{ marginTop: '29px' }}>Пол</Typography>
-                        <Typography variant="h3" sx={{ marginTop: '29px' }}>E-mail: {data.email}</Typography>
-                        <Typography variant="h3" sx={{ marginTop: '29px' }}>Телефон: {data.phone}</Typography>
+                        <Typography variant="h6" sx={{ marginBottom: '20px' }}>Банковские карты</Typography>
+                        <BankCardsWrapper>
+                          {
+                            cardsState.length === 0 ?
+                              null
+                              :
+                              <>
+                                {
+                                  cardsState.map((elem: ICardStateElem) => {
+                                    return <MiniCard nums={elem.nums} dateExpire={elem.dateExpired} cardPaymentType={elem.cardType} backgroundColor={elem.backgroundColor} key={cardsState.indexOf(elem).toString()} />
+                                  })
+                                }
+                              </>
+
+                          }
+                          <img src="card_add.png" style={{ width: '30px', cursor: 'pointer' }} onClick={handleAddCard} />
+                        </BankCardsWrapper>
+
+
+                        <Typography variant="h6" sx={{ marginTop: '29px', marginBottom: '20px' }}>Сертификаты и промокоды</Typography>
+                        <TextField sx={{ width: '300px' }}
+                          id="outlined-basic" label="" variant="outlined" />
                       </ThemeProvider>
                       <ThemeProvider theme={buttonM}>
-                        <Button sx={{ marginTop: '40px' }} >
-                          Редактировать</Button>
+                        <Button sx={{ marginLeft: '10px' }}>
+                          Активировать</Button>
                       </ThemeProvider>
                     </Grid>
                 </Grid>
